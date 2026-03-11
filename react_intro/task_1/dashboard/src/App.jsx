@@ -23,9 +23,9 @@ const App = () => {
         <input type="email" id="email" />
         <label htmlFor="password">Password:</label>
         <input type="password" id="password" />
+        <button type="submit">OK</button>
       </div>
-      <button type="submit">OK</button>
-
+      
       <div className="App-footer">
         <p>Copyright {getCurrentYear()} - {getFooterCopy(false)}</p>
       </div>
