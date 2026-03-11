@@ -21,7 +21,7 @@ test('renders an img element', () => {
 test('renders 2 input elements', () => {
     render(<App />);
     const inputs = screen.getAllByRole('textbox');
-    expect(inputs.length).toBe(2);
+    expect(inputs).toHaveLength(2);
 });
 
 test('renders Email and Password labels', () => {
@@ -32,5 +32,6 @@ test('renders Email and Password labels', () => {
 
 test('renders OK button', () => {
     render(<App />);
-    expect(screen.getByText(/ok/i)).toBeInTheDocument();
+    const button = screen.getByRole('button', { name: /ok/i });
+    expect(button).toBeInTheDocument();
 });
