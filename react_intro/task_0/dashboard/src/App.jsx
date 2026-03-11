@@ -1,9 +1,8 @@
 import logo from './assets/holberton-logo.jpg';
-import './App.css'
+import './App.css';
 
 const App = () => {
   const date = new Date()
-
 
   return (
     <>
@@ -16,7 +15,7 @@ const App = () => {
         <p>Login to access the full dashboard</p>
       </div>
       <div className='App-footer'>
-        <p>Copyright 2026 - holberton School</p>
+        <p>Copyright {date.getFullYear()} - holberton School</p>
       </div>
     </>
   )
