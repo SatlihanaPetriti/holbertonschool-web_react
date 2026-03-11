@@ -20,8 +20,7 @@ const App = () => {
       </div>
 
       <div className='App-footer'>
-
-        <p >Copyright {date.getFullYear()} - holberton School</p>
+        <p>Copyright 2026 - Holberton School</p>
       </div>
     </>
   )
