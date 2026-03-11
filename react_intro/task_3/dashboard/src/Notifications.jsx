@@ -2,7 +2,7 @@ import './Notifications.css'
 import close from './assets/close-button.png'
 import { getLatestNotification } from './utils'
 
-const Notification = () => {
+const Notifications = () => {
   return <div className="notification-items   ">
 
     <p>Here is the list of notifications</p>
@@ -26,4 +26,4 @@ const Notification = () => {
 
   </div>
 }
-export default Notification;
+export default Notifications;
