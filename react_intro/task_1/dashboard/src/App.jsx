@@ -1,5 +1,5 @@
 import logo from './assets/holberton-logo.jpg';
-import { getCurrentYear, getFooterCopy } from './utils/utils';
+import { getCurrentYear, getFooterCopy } from "./utils";
 import Notifications from './Notifications';
 import './App.css'
 
@@ -21,7 +21,7 @@ const App = () => {
       </div>
 
       <div className="App-footer">
-        <p>Copyright {getCurrentYear()} - {getFooterCopy(true)}</p>
+        <p>Copyright {getCurrentYear()} - {getFooterCopy(false)}</p>
       </div>
     </>
   );

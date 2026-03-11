@@ -1,4 +1,3 @@
-.notification-items{
-    border: 1px solid var(--primar-color);
-    padding: 1rem;
+.notification-items {
+    border: 2px dashed red;
 }

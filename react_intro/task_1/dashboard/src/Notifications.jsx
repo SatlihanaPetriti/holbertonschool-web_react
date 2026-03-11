@@ -1,5 +1,4 @@
 import './Notifications.css';
-
 const Notifications = () => {
   return (
       <div className='notification-items'>
