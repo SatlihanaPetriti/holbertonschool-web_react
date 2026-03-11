@@ -1,4 +1,3 @@
-// task_3/dashboard/src/utils.spec.js
 import { getCurrentYear, getFooterCopy, getLatestNotification } from './utils';
 
 describe('Utility functions', () => {
