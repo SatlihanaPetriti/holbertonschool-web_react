@@ -17,8 +17,9 @@ const Notification = () => {
 
       <button
         aria-label="Close"
+        style={{ position: "absolute", top: "15px", right: "15px", border: "none", background: "none", cursor: "pointer" }}
       >
-        <img src={close} alt="close icon" />
+        <img src={close} style={{ width: "15px", height: "15px" }} alt="close icon" />
       </button>
     </div>
   );
