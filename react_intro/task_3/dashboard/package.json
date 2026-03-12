@@ -10,12 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.8",
     "@babel/preset-react": "^7.24.7",
+    "@cfaester/enzyme-adapter-react-18": "^0.8.0",
     "@eslint/js": "^9.39.1",
     "@swc/core": "^1.15.18",
     "@swc/jest": "^0.2.39",
@@ -27,6 +28,8 @@
     "@vitejs/plugin-react": "^5.1.1",
     "babel-jest": "^30.3.0",
     "babel-plugin-react-compiler": "^1.0.0",
+    "cheerio": "^1.0.0-rc.12",
+    "enzyme": "^3.11.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
@@ -41,6 +44,9 @@
     "transform": {
       "^.+\\.[jt]sx?$": "babel-jest"
     },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(cheerio|enzyme)/)"
+    ],
     "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy",
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/fileTransformer.js"
