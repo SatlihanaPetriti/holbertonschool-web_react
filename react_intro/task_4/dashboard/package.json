@@ -1,7 +1,6 @@
 {
     "name": "dashboard",
     "private": true,
-    "homepage": "https://satlihanapetriti.github.io/holbertonschool-web_react",
     "version": "0.0.0",
     "type": "module",
     "scripts": {
