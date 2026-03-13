@@ -4,11 +4,7 @@
 }
 
 .Notifications ul {
-    list-style-type: none;
-}
-
-.Notifications ul li {
-    list-style-type: disc;
+    padding-left: 20px;
 }
 
 .Notifications ul li[data-priority="default"] {
@@ -17,9 +13,4 @@
 
 .Notifications ul li[data-priority="urgent"] {
     color: red;
-}
-
-.Notifications ul li:nth-last-child(1) {
-    color: red;
-    font-size: 18px;
 }
