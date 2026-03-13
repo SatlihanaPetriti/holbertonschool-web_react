@@ -3,14 +3,18 @@
   align-items: center;
   border-bottom: 1px solid #e1003c;
 }
-.App-body{
+
+.App-body {
   padding-bottom: 400px;
 }
+
 .App-footer {
-  
+
   border-top: 1px solid #e1003c;
   text-align: center;
+  font-style: italic;
 }
+
 :root {
   --holb-red: #FF0000;
 }
