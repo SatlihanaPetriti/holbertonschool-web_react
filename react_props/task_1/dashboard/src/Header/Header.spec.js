@@ -2,16 +2,18 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Header from './Header';
 
-describe('Header', () => {
-    test('renders the Holberton logo', () => {
+describe('Header Component', () => {
+    it('should render the Holberton logo', () => {
         render(<Header />);
-        const logo = screen.getByAltText('holberton logo');
-        expect(logo).toBeInTheDocument();
+        const logo = screen.getByAltText(/holberton logo/i);
+        expect(logo).toBeTruthy();
+        expect(logo.src).toContain('holberton-logo.jpg');
     });
 
-    test('renders the heading h1 element with the correct text', () => {
+    it('should render the heading with correct text', () => {
         render(<Header />);
         const heading = screen.getByRole('heading', { level: 1 });
-        expect(heading).toHaveTextContent('School dashboard');
+        expect(heading).toBeTruthy();
+        expect(heading.textContent).toBe('School dashboard');
     });
 });
