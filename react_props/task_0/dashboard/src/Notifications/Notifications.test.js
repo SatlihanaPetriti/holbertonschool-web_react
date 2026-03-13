@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import Notifications from './Notifications';
 
-test('Header renders without crashing', () => {
+test('Notifications renders without crashing', () => {
     render(<Notifications />);
 });
