@@ -1,11 +1,13 @@
 .notification-items {
-    border: 2px dashed red;
+    border: 1px dotted #e1003c;
+    position: relative;
 }
 
-li[data-priority="default"] {
+
+[data-priority="default"] {
     color: blue;
 }
 
-li[data-priority="urgent"] {
+[data-priority="urgent"] {
     color: red;
 }
