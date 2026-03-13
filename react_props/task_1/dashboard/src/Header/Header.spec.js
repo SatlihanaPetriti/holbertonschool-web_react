@@ -5,13 +5,21 @@ import Header from './Header';
 describe('Header Component', () => {
     test('renders the Holberton logo', () => {
         render(<Header />);
+
+        // Check for logo by alt text
         const logo = screen.getByAltText('holberton logo');
         expect(logo).toBeInTheDocument();
+
+        // Verify it's an image
+        expect(logo.tagName).toBe('IMG');
     });
 
-    test('renders h1 heading with correct text', () => {
+    test('renders the heading h1 element with the correct text', () => {
         render(<Header />);
+
+        // Check for heading
         const heading = screen.getByRole('heading', { level: 1 });
-        expect(heading).toHaveTextContent('School dashboard');
+        expect(heading).toBeInTheDocument();
+        expect(heading.textContent).toBe('School dashboard');
     });
 });
