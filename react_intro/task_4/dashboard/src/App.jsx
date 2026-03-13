@@ -30,8 +30,9 @@ const App = () => {
       </div>
 
       <div className='App-footer'>
-
-        <p ><i>Copyright</i> {getCurrentYear()} - {getFooterCopy(false)}</p>
+        <p>
+          Copyright {getCurrentYear()} - {getFooterCopy(false)}
+        </p>
       </div>
     </>
   )
