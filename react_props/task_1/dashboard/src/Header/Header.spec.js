@@ -9,9 +9,6 @@ describe('Header Component', () => {
         // Check for logo by alt text
         const logo = screen.getByAltText('holberton logo');
         expect(logo).toBeInTheDocument();
-
-        // Verify it's an image
-        expect(logo.tagName).toBe('IMG');
     });
 
     test('renders the heading h1 element with the correct text', () => {

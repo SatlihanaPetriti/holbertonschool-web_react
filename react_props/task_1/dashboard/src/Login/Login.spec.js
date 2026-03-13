@@ -19,8 +19,8 @@ describe('Login Component', () => {
         expect(screen.getByRole('button', { name: 'OK' })).toBeInTheDocument();
 
         // Verify counts
-        const inputs = screen.getAllByRole('textbox'); // gets email (password is type="password" so not a textbox)
-        expect(inputs.length + 1).toBe(2); // +1 for password input which isn't a textbox
+        const inputs = screen.getAllByRole('textbox'); 
+        expect(inputs.length + 1).toBe(2); 
     });
 
     test('inputs focus when clicking on the related labels', async () => {
