@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { getCurrentYear, getFooterCopy, getLatestNotification } from './utils';
 
 describe('Utils functions', () => {

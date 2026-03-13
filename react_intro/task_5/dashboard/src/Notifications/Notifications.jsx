@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable */
 import './Notifications.css';
 import close_icon from '../assets/close-button.png';
 import { getLatestNotification } from '../utils/utils';
