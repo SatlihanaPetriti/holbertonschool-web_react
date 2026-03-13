@@ -1,7 +1,7 @@
-[data-priority="default"] {
+.default {
     color: blue;
 }
 
-[data-priority="urgent"] {
+.urgent {
     color: red;
 }
