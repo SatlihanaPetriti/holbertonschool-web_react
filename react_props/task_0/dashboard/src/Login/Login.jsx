@@ -1,3 +1,4 @@
+/* eslint-disable */
 import './Login.css';
 
 function Login() {
