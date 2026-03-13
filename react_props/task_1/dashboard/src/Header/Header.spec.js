@@ -8,7 +8,7 @@ describe('Header Component', () => {
         expect(logo).toBeInTheDocument();
     });
 
-    test('renders heading h1 with correct text', () => {
+    test('renders h1 heading with correct text', () => {
         render(<Header />);
         const heading = screen.getByRole('heading', { level: 1 });
         expect(heading).toHaveTextContent('School dashboard');
