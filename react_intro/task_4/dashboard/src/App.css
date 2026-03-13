@@ -11,3 +11,6 @@
   border-top: 1px solid #e1003c;
   text-align: center;
 }
+:root {
+  --holb-red: #FF0000;
+}

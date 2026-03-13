@@ -1,7 +1,25 @@
-.default {
+.Notifications {
+    border: 2px dashed var(--holb-red);
+    padding: 24px;
+}
+
+.Notifications ul {
+    list-style-type: none;
+}
+
+.Notifications ul li {
+    list-style-type: disc;
+}
+
+.Notifications ul li[data-priority="default"] {
     color: blue;
 }
 
-.urgent {
+.Notifications ul li[data-priority="urgent"] {
     color: red;
+}
+
+.Notifications ul li:nth-last-child(1) {
+    color: red;
+    font-size: 18px;
 }
