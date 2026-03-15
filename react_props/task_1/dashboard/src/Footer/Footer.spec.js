@@ -1,23 +1,18 @@
-/* eslint-disable */
-import { render, screen } from "@testing-library/react";
-import * as utils from "../utils/utils";
-import Footer from "./Footer";
+import { render, screen } from '@testing-library/react';
+import Footer from './Footer';
+import { getCurrentYear } from '../utils/utils';
 
-describe("Footer component", () => {
-    let mockGetFooterCopy = null;
-    beforeEach(() => {
-        mockGetFooterCopy = jest
-            .spyOn(utils, "getFooterCopy")
-            .mockReturnValue("Holberton School");
-
+describe('Footer Component', () => {
+    test('renders copyright with current year and Holberton School when isIndex=true', () => {
+        const year = getCurrentYear();
         render(<Footer />);
-    });
 
-    //   Check text in footer has correct test when getFooterCopy arg is true
-    it("Has correct text", () => {
-        const FooterText = screen.getByText(/Copyright 2025 - holberton School/i);
-        expect(FooterText).toBeInTheDocument();
+        // The correct text should be "Holberton School", not "Holberton School main dashboard"
+        const paragraph = screen.getByText(
+            `Copyright ${year} - Holberton School`,
+            { exact: false }
+        );
 
-        mockGetFooterCopy.mockRestore();
+        expect(paragraph).toBeInTheDocument();
     });
 });
