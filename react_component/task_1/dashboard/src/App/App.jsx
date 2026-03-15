@@ -65,9 +65,7 @@ class App extends Component {
             <CourseList courses={this.coursesList} />
           </div>
         ) : (
-          <div className="App-body">
-            <Login />
-          </div>
+          <Login />
         )}
         <Footer />
       </>
