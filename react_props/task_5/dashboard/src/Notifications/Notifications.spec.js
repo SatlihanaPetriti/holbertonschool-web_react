@@ -1,32 +1,88 @@
 /* eslint-disable */
+/* eslint-disable */
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import NotificationItem from "./NotificationItem";
+import Notifications from "./Notifications";
 
-describe("NotificationItem Component", () => {
-    it("Color is blue when type is default", () => {
-        const type = "default";
-        const value = "New course available";
+describe("Notifications Component", () => {
+    describe("When displayDrawer is false", () => {
+        it("should display only the title, not the drawer content", () => {
+            render(<Notifications displayDrawer={false} />);
 
-        render(<NotificationItem type={type} value={value} />);
+            // Title should always be displayed
+            expect(screen.getByText("Your notifications")).toBeInTheDocument();
 
-        const listElement = screen.getByRole("listitem");
-
-        expect(listElement).toHaveStyle({ color: "blue" });
-
-        expect(listElement).toHaveAttribute("data-notification-type", "default");
+            // Drawer content should not be displayed
+            expect(screen.queryByText("Here is the list of notifications")).not.toBeInTheDocument();
+            expect(screen.queryByText("No new notification for now")).not.toBeInTheDocument();
+            expect(screen.queryByRole("button", { name: "Close" })).not.toBeInTheDocument();
+            expect(screen.queryByRole("list")).not.toBeInTheDocument();
+        });
     });
 
-    it("Color is red when type is urgent", () => {
-        const type = "urgent";
-        const value = "New resume available";
+    describe("When displayDrawer is true", () => {
+        it("should display the drawer content with notifications", () => {
+            const notifications = [
+                { id: 1, type: "default", value: "New course available" },
+                { id: 2, type: "urgent", value: "New resume available" }
+            ];
 
-        render(<NotificationItem type={type} value={value} />);
+            render(<Notifications notifications={notifications} displayDrawer={true} />);
 
-        const listElement = screen.getByRole("listitem");
+            // Title should always be displayed
+            expect(screen.getByText("Your notifications")).toBeInTheDocument();
 
-        expect(listElement).toHaveStyle({ color: "red" });
+            // Drawer content should be displayed
+            expect(screen.getByText("Here is the list of notifications")).toBeInTheDocument();
+            expect(screen.getByRole("button", { name: "Close" })).toBeInTheDocument();
+            expect(screen.getByRole("list")).toBeInTheDocument();
 
-        expect(listElement).toHaveAttribute("data-notification-type", "urgent");
+            // Check if notifications are rendered
+            expect(screen.getByText("New course available")).toBeInTheDocument();
+            expect(screen.getByText("New resume available")).toBeInTheDocument();
+        });
+
+        it("should display 'No new notification for now' when notifications array is empty", () => {
+            render(<Notifications notifications={[]} displayDrawer={true} />);
+
+            // Title should always be displayed
+            expect(screen.getByText("Your notifications")).toBeInTheDocument();
+
+            // Should show "No new notification for now"
+            expect(screen.getByText("No new notification for now")).toBeInTheDocument();
+
+            // Should not show the notification list or the "Here is the list" text
+            expect(screen.queryByText("Here is the list of notifications")).not.toBeInTheDocument();
+            expect(screen.queryByRole("list")).not.toBeInTheDocument();
+
+            // Close button should still be visible
+            expect(screen.getByRole("button", { name: "Close" })).toBeInTheDocument();
+        });
+    });
+
+    describe("NotificationItem styling", () => {
+        it("should have blue color when type is default", () => {
+            const { container } = render(
+                <Notifications
+                    notifications={[{ id: 1, type: "default", value: "Test" }]}
+                    displayDrawer={true}
+                />
+            );
+
+            const listItem = container.querySelector('[data-notification-type="default"]');
+            expect(listItem).toHaveStyle({ color: "blue" });
+        });
+
+        it("should have red color when type is urgent", () => {
+            const { container } = render(
+                <Notifications
+                    notifications={[{ id: 1, type: "urgent", value: "Test" }]}
+                    displayDrawer={true}
+                />
+            );
+
+            const listItem = container.querySelector('[data-notification-type="urgent"]');
+            expect(listItem).toHaveStyle({ color: "red" });
+        });
     });
 });
