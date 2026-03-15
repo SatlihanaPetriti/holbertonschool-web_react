@@ -17,7 +17,6 @@ export default function Notifications() {
             <button aria-label="Close" onClick={() => { console.log("Close button has been clicked") }} style={{ marginLeft: "auto", backgroundColor: "white", border: "none", height: "25px" }}>
                 <img alt="Close Button" src={closeIcon}></img>
             </button>
-
         </div>
     )
 }
