@@ -7,7 +7,6 @@ import Footer from '../Footer/Footer';
 import { getLatestNotification } from '../utils/utils';
 import './App.css';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +17,7 @@ class App extends Component {
       {
         id: 3,
         type: "urgent",
-        html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" },
+        html: { __html: getLatestNotification() }
       },
     ];
     this.coursesList = [
@@ -27,24 +26,25 @@ class App extends Component {
       { id: 3, name: "React", credit: "40" },
     ];
 
-    // Key combo property
-    this.handleKeyDown = (e) => {
-      if (e.ctrlKey && e.key === 'h') {
-        e.preventDefault();
-        alert("Logging you out");
+    // Bind the method
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
 
-        this.props.logOut();
-      }
+  handleKeyDown(e) {
+    if (e.ctrlKey && e.key === 'h') {
+      e.preventDefault();
+      alert("Logging you out");
+      this.props.logOut();
     }
   }
 
   componentDidMount() {
-    // listen for keyboard clicks
-    window.addEventListener("keydown", this.handleKeyDown);
+    // Use document instead of window for better test compatibility
+    document.addEventListener("keydown", this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 
   render() {
@@ -55,7 +55,11 @@ class App extends Component {
         <div className="notifications-header">
           <Header />
           <div className="root-notifications">
-            <Notifications notifications={this.notificationsList} />
+            {/* Add displayDrawer prop */}
+            <Notifications
+              notifications={this.notificationsList}
+              displayDrawer={true}
+            />
           </div>
         </div>
         {isLoggedIn ? (
@@ -69,7 +73,6 @@ class App extends Component {
       </>
     );
   }
-
 }
 
 App.defaultProps = {
