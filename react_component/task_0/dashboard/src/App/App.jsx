@@ -47,15 +47,6 @@ import './App.css'
 // export default App;
 
 /* eslint-disable */
-import { Component } from 'react';
-import CourseList from '../CourseList/CourseList'
-import '../CourseList/CourseList.css'
-import Notifications from '../Notifications/Notifications';
-import Header from '../Header/Header';
-import Login from '../Login/Login';
-import Footer from '../Footer/Footer';
-import { getLatestNotification } from '../utils/utils';
-import './App.css'
 
 class App extends Component {
   constructor(props) {
