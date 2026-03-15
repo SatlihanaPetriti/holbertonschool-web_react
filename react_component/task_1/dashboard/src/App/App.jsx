@@ -1,72 +1,25 @@
-/* eslint-disable */
 import { Component } from 'react';
-import CourseList from '../CourseList/CourseList'
-import '../CourseList/CourseList.css'
+import CourseList from '../CourseList/CourseList';
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import { getLatestNotification } from '../utils/utils';
-import './App.css'
-
-// function App({ isLoggedIn = false }) {
-//   const notificationsList = [
-//     {
-//       id: 1,
-//       type: 'default',
-//       value: 'New course available'
-//     },
-//     {
-//       id: 2,
-//       type: 'urgent',
-//       value: 'New resume available'
-//     },
-//     {
-//       id: 3,
-//       type: 'urgent',
-//       html: { __html: getLatestNotification() }
-//     }
-//   ];
-//   const coursesList = [
-//     { id: 1, name: "ES6", credit: "60" },
-//     { id: 2, name: "Webpack", credit: "20" },
-//     { id: 3, name: "React", credit: "40" },
-//   ];
-
-//   return (
-//     <>
-//       <div className="root-notifications">
-//         <Notifications notifications={notificationsList} displayDrawer={true} />
-//       </div>
-//       <Header />
-//       {isLoggedIn ? (<div className='courses-body'><CourseList courses={coursesList} /></div>) : (<Login />)}
-//       <Footer />
-//     </>
-//   );
-// }
-
-// export default App;
+import './App.css';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.notificationsList = [
-      {
-        id: 1,
-        type: 'default',
-        value: 'New course available'
-      },
-      {
-        id: 2,
-        type: 'urgent',
-        value: 'New resume available'
-      },
+      { id: 1, type: "default", value: "New course available" },
+      { id: 2, type: "urgent", value: "New resume available" },
       {
         id: 3,
-        type: 'urgent',
-        html: { __html: getLatestNotification() }
-      }
+        type: "urgent",
+        html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" },
+      },
     ];
     this.coursesList = [
       { id: 1, name: "ES6", credit: "60" },
@@ -74,43 +27,39 @@ class App extends Component {
       { id: 3, name: "React", credit: "40" },
     ];
 
-    // Bind the handleKeyDown method to this instance
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
+    // Key combo property
+    this.handleKeyDown = (e) => {
+      if (e.ctrlKey && e.key === 'h') {
+        e.preventDefault();
+        alert("Logging you out");
 
-  // Add event listener when component mounts
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  // Remove event listener when component unmounts
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  // Handle keyboard events
-  handleKeyDown(event) {
-    const { logOut = () => { } } = this.props;
-
-    // Check if control and h keys are pressed simultaneously
-    if (event.ctrlKey && event.key === 'h') {
-      event.preventDefault(); // Prevent default browser behavior
-      alert('Logging you out');
-      logOut();
+        this.props.logOut();
+      }
     }
   }
 
+  componentDidMount() {
+    // listen for keyboard clicks
+    window.addEventListener("keydown", this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
   render() {
-    const { isLoggedIn = false } = this.props;
+    const { isLoggedIn } = this.props;
 
     return (
       <>
-        <div className="root-notifications">
-          <Notifications notifications={this.notificationsList} displayDrawer={true} />
+        <div className="notifications-header">
+          <Header />
+          <div className="root-notifications">
+            <Notifications notifications={this.notificationsList} />
+          </div>
         </div>
-        <Header />
         {isLoggedIn ? (
-          <div className='courses-body'>
+          <div className="courses-body">
             <CourseList courses={this.coursesList} />
           </div>
         ) : (
@@ -120,9 +69,9 @@ class App extends Component {
       </>
     );
   }
+
 }
 
-// Set default props
 App.defaultProps = {
   isLoggedIn: false,
   logOut: () => { }
