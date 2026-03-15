@@ -1,25 +1,21 @@
-/* eslint-disable */
-import React from "react";
+import React from 'react';
 
-const NotificationItem = ({ type = "default", html, value }) => {
-    const style = type === "urgent" ? { color: "red" } : { color: "blue" };
+const NotificationItem = ({ type, html, value }) => {
+    const style = type === "default" ? { color: "blue" } : { color: "red" };
 
     if (value) {
-        // Always render value first if it exists
         return (
-            <li data-notification-type={type} style={style}>
+            <li style={style} data-notification-type={type}>
                 {value}
             </li>
         );
-    }
-
-    else if (html) {
+    } else if (html) {
         return (
-            <li data-notification-type={type} style={style} dangerouslySetInnerHTML={html} />
+            <li style={style} data-notification-type={type} dangerouslySetInnerHTML={html}></li>
         );
     }
 
-    return null; 
+    return null;
 };
 
 export default NotificationItem;
