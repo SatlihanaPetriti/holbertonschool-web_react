@@ -8,7 +8,10 @@ describe("Header Component", () => {
 
     // Test if Header renders correct text
     it("Renders correct text", () => {
-        const heading = screen.getByRole("heading", { name: /School Dashboard/i });
+        const heading = screen.getByRole("heading", {
+            level: 1,
+            name: /School Dashboard/i,
+        });
         expect(heading).toBeInTheDocument();
     });
 
