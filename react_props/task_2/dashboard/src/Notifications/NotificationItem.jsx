@@ -1,21 +1,25 @@
-import React from 'react';
+/* eslint-disable */
 
-const NotificationItem = ({ type, html, value }) => {
-    const style = type === "default" ? { color: "blue" } : { color: "red" };
+import React from "react";
 
-    if (value) {
+const NotificationItem = ({ type = "default", html, value }) => {
+    const style = type === "urgent" ? { color: "red" } : { color: "blue" };
+
+    if (html) {
         return (
-            <li style={style} data-notification-type={type}>
-                {value}
-            </li>
-        );
-    } else if (html) {
-        return (
-            <li style={style} data-notification-type={type} dangerouslySetInnerHTML={html}></li>
+            <li
+                data-notification-type={type}
+                style={style}
+                dangerouslySetInnerHTML={html}
+            />
         );
     }
 
-    return null;
+    return (
+        <li data-notification-type={type} style={style}>
+            {value}
+        </li>
+    );
 };
 
 export default NotificationItem;
