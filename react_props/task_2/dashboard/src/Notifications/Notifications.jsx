@@ -3,8 +3,9 @@ import './Notifications.css';
 import close_icon from '../assets/close-button.png';
 import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-export const Notifications = ({ notifications }) => {
+const Notifications = ({ notifications }) => {
     return (
         <div className="Notifications">
             <button
