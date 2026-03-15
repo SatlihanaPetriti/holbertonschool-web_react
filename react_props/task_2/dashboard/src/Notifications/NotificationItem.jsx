@@ -1,17 +1,8 @@
 /* eslint-disable */
-/* eslint-disable */
 import React from "react";
 
 const NotificationItem = ({ type = "default", html, value }) => {
     const style = type === "urgent" ? { color: "red" } : { color: "blue" };
-
-    if (value) {
-        return (
-            <li data-notification-type={type} style={style}>
-                {value}
-            </li>
-        );
-    }
 
     if (html) {
         return (
@@ -23,7 +14,11 @@ const NotificationItem = ({ type = "default", html, value }) => {
         );
     }
 
-    return null;
+    return (
+        <li data-notification-type={type} style={style}>
+            {value}
+        </li>
+    );
 };
 
 export default NotificationItem;
