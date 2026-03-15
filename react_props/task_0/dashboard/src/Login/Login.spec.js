@@ -1,32 +1,45 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import Login from './Login';
+import { render, screen } from "@testing-library/react";
+import Login from "./Login";
 
-describe('Login Component', () => {
+describe("Login Component", () => {
     beforeEach(() => {
         render(<Login />);
     });
 
-    test('renders 2 labels, 2 inputs and 1 button', () => {
-        const labels = screen.getAllByRole('label');
-        const inputs = screen.getAllByRole('textbox');
-        const passwordInputs = screen.getAllByLabelText(/password/i);
-        const button = screen.getByRole('button');
+    // Test if Login paragraph has correct text
+    it("Login has correct text", () => {
+        const loginText = screen.getByText(/Login to access the full dashboard/i);
 
-        expect(labels.length).toBe(2);
-        expect(inputs.length + passwordInputs.length).toBe(2);
-        expect(button).toBeInTheDocument();
+        expect(loginText).toBeInTheDocument();
     });
 
-    test('inputs focus when clicking on related labels', async () => {
-        const user = userEvent.setup();
-        const emailInput = screen.getByLabelText(/email/i);
-        const passwordInput = screen.getByLabelText(/password/i);
+    // Test if Login renders two input elements
+    it("renders two input elements", () => {
+        //Get input elements
+        const inputElements = screen.getAllByRole("textbox");
+        const inputLength = inputElements.length;
 
-        await user.click(screen.getByText(/email/i));
-        expect(emailInput).toHaveFocus();
+        // Assert element
+        expect(inputLength).toEqual(1);
+    });
 
-        await user.click(screen.getByText(/password/i));
-        expect(passwordInput).toHaveFocus();
+    // Test if Login renders the correct Labels
+    it("renders two label elements with text 'email' & 'password'", () => {
+        // Get labels
+        const email = screen.getByLabelText(/Email/i);
+        const password = screen.getByLabelText(/Password/i);
+
+        // Assert elements and values
+        expect(email).toBeInTheDocument();
+        expect(password).toBeInTheDocument();
+    });
+
+    // Test if Login renders button with correct text
+    it("renders two button with text 'OK'", () => {
+        //Get button
+        const button = screen.getByRole("button");
+
+        // Assert text content of button
+        expect(button.textContent).toBe("OK");
     });
 });

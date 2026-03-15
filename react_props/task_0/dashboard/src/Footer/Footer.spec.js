@@ -1,17 +1,14 @@
-import { render, screen } from '@testing-library/react';
-import Footer from './Footer';
-import { getCurrentYear } from '../utils/utils';
+import { render, screen } from "@testing-library/react";
+import Footer from "./Footer";
 
-describe('Footer Component', () => {
-    test('renders copyright with current year when isIndex=true', () => {
-        const year = getCurrentYear();
+describe("Footer component", () => {
+    beforeEach(() => {
         render(<Footer />);
+    });
 
-        const paragraph = screen.getByText(
-            `Copyright ${year} - Holberton School main dashboard`,
-            { exact: false }
-        );
-
-        expect(paragraph).toBeInTheDocument();
+    //   Check text in footer
+    it("Has correct text", () => {
+        const FooterText = screen.getByText(/Copyright 2025 - holberton School/i);
+        expect(FooterText).toBeInTheDocument();
     });
 });
