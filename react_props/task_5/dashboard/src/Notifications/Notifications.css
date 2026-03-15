@@ -1,21 +1,39 @@
-.notifications {
-    display: flex;
-    justify-content: flex-start;
-    border-style: dotted;
-    border-color: #e1003c;
-    padding: 2px;
-    font-size: 12px;
+.notifications-container {
+    position: relative;
+    font-family: Arial, sans-serif;
 }
 
-.notifications P {
-    padding: 0 0 0 1rem;
+.notification-title {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
 }
 
-.notifications img {
-    width: 20px;
+.notification-items {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: white;
+    position: relative;
+}
+
+.notification-items p {
+    margin: 0 0 10px 0;
+}
+
+.notification-items ul {
+    padding-left: 20px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.close-button img {
     height: 20px;
-}
-
-li {
-    color: red;
+    width: 20px;
 }
