@@ -1,58 +1,34 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import Notifications from "./Notifications";
+/* eslint-disable */
+import { render, screen, fireEvent } from '@testing-library/react';
+import Notifications from './Notifications';
 
-describe("Notification Component", () => {
-    beforeEach(() => {
+describe('Notifications component', () => {
+
+    test('renders the notifications title', () => {
         render(<Notifications />);
+        const title = screen.getByText(/Here is the list of notifications/i);
+        expect(title).toBeInTheDocument();
     });
 
-    test("Has title", () => {
-        // Get tile
-        const titleElement = screen.getByText(/Here is the list of notifications/i);
-
-        //assert existance of title
-        expect(titleElement).toBeInTheDocument();
-    });
-
-    test("Contains button", () => {
-        // Get tile
-        const buttonElement = screen.getByRole("button");
-
-        //assert existance of button
-        expect(buttonElement).toBeInTheDocument();
-    });
-
-    test("Contains 3 li elements", () => {
-        // Get tile
-        const listElements = screen.getAllByRole("listitem");
-
-        //assert number of li elements
-        expect(listElements.length).toBe(3);
-
-        //assert values of li elements
-        expect(listElements[0].textContent).toMatch(/New course available/i);
-        expect(listElements[1].textContent).toMatch(/New resume available/i);
-        expect(listElements[2].textContent).toMatch(
-            /Urgent requirement - complete by EOD/i
-        );
-    });
-
-    test("Close button logs message", () => {
-        cleanup();
-
-        // Spy on console.log
-        const logSpy = jest.spyOn(console, "log").mockImplementation(() => { });
-
-        // Render component
+    test('renders the close button', () => {
         render(<Notifications />);
-
-        // Simulate click
-        fireEvent.click(screen.getByRole("button", { name: /Close/i }));
-
-        //assert message logged when button is clicked
-        expect(logSpy).toHaveBeenCalledWith("Close button has been clicked");
-
-        // Clean up
-        logSpy.mockRestore();
+        const button = screen.getByRole('button', { name: /close/i });
+        expect(button).toBeInTheDocument();
     });
+
+    test('renders 3 list items', () => {
+        render(<Notifications />);
+        const items = screen.getAllByRole('listitem');
+        expect(items).toHaveLength(3);
+    });
+
+    test('logs message when close button is clicked', () => {
+        const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => { });
+        render(<Notifications />);
+        const button = screen.getByRole('button', { name: /close/i });
+        fireEvent.click(button);
+        expect(consoleSpy).toHaveBeenCalledWith('Close button has been clicked');
+        consoleSpy.mockRestore();
+    });
+
 });

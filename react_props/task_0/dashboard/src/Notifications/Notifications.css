@@ -1,26 +1,16 @@
-.notifications {
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: flex-start;
-    border-style: dotted;
-    border-color: #e1003c;
-    padding: 2px;
-    font-size: 12px;
+.Notifications {
+    border: 2px dashed red;
+    padding: 24px;
 }
 
-.notifications P {
-    padding: 0 0 0 1rem;
+.Notifications ul {
+    padding-left: 20px;
 }
 
-.notifications img {
-    width: 20px;
-    height: 20px;
-}
-
-li {
-    color: #e1003c;
-}
-
-li:first-child {
+.Notifications ul li[data-priority="default"] {
     color: blue;
+}
+
+.Notifications ul li[data-priority="urgent"] {
+    color: red;
 }
