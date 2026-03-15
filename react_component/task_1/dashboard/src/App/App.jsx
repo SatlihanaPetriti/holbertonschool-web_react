@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CourseList from '../CourseList/CourseList';
 import Notifications from '../Notifications/Notifications';
@@ -8,10 +8,11 @@ import Footer from '../Footer/Footer';
 import { getLatestNotification } from '../utils/utils';
 import './App.css';
 
+// Notification and Course lists
 const listNotifications = [
   { id: 1, type: 'default', value: 'New course available' },
   { id: 2, type: 'urgent', value: 'New resume available' },
-  { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+  { id: 3, type: 'urgent', __html: getLatestNotification() }, 
 ];
 
 const listCourses = [
@@ -51,7 +52,7 @@ class App extends Component {
           <Header />
           <div className="App-body">
             {isLoggedIn ? (
-              <CourseList courses={listCourses} />
+              <CourseList listCourses={listCourses} />
             ) : (
               <Login />
             )}

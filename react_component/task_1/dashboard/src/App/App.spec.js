@@ -3,88 +3,46 @@ import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 describe("App Component", () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
+    afterEach(() => cleanup());
 
-    afterEach(() => {
-        cleanup();
-    });
-
-    it("Renders Header component", () => {
+    it("renders Header component", () => {
         render(<App />);
-        const heading = screen.getByRole("heading", {
-            level: 1,
-            name: /school dashboard/i,
-        });
-        expect(heading).toBeInTheDocument();
+        expect(screen.getByRole("heading", { level: 1, name: /school dashboard/i })).toBeInTheDocument();
     });
 
-    it("Renders Login Component", () => {
-        render(<App />);
-        const loginText = screen.getByText(/Login to access the full dashboard/i);
-        expect(loginText).toBeInTheDocument();
+    it("renders Login component when not logged in", () => {
+        render(<App isLoggedIn={false} />);
+        expect(screen.getByText(/Login to access the full dashboard/i)).toBeInTheDocument();
     });
 
-    it("Renders Footer Component", () => {
+    it("renders CourseList when logged in", () => {
+        render(<App isLoggedIn={true} />);
+        expect(screen.getByText(/ES6/i)).toBeInTheDocument(); // first course name
+    });
+
+    it("renders Footer component", () => {
         render(<App />);
         expect(screen.getByText(/Copyright/i)).toBeInTheDocument();
     });
 
-    it("Login is rendered when isLoggedIn is false", () => {
-        const rendered = render(<App isLoggedIn={false} />);
-        const container = rendered.container;
-        const loginComponent = container.querySelector(".App-body");
-        expect(loginComponent).toBeInTheDocument();
-    });
-
-    it("CourseList is rendered when isLoggedIn is true", () => {
-        const rendered = render(<App isLoggedIn={true} />);
-        const container = rendered.container;
-        const courseList = container.querySelector("#CourseList");
-        expect(courseList).toBeInTheDocument();
-    });
-
-    it("Logout function gets called once", async () => {
-        cleanup();
-
+    it("calls logOut when Ctrl+H is pressed", async () => {
         const logOut = jest.fn();
-        const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => { });
-
+        const alertMock = jest.spyOn(window, "alert").mockImplementation(() => { });
         render(<App logOut={logOut} />);
 
         await userEvent.keyboard("{Control>}h{/Control}");
 
-        expect(logOut).toBeCalledTimes(1);
-
-        alertMock.mockRestore();
-    });
-
-    it("Alert function is called with correct message", async () => {
-        cleanup();
-
-        const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => { });
-
-        render(<App />);
-
-        await userEvent.keyboard("{Control>}h{/Control}");
-
         expect(alertMock).toHaveBeenCalledWith("Logging you out");
-        expect(alertMock).toBeCalledTimes(1);
+        expect(logOut).toHaveBeenCalledTimes(1);
 
         alertMock.mockRestore();
     });
 
-    it("should remove event listener when component unmounts", () => {
-        const removeEventListenerSpy = jest.spyOn(document, 'removeEventListener');
-        const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => { });
-
+    it("removes keydown listener on unmount", () => {
+        const removeSpy = jest.spyOn(document, "removeEventListener");
         const { unmount } = render(<App />);
         unmount();
-
-        expect(removeEventListenerSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
-
-        removeEventListenerSpy.mockRestore();
-        alertMock.mockRestore();
+        expect(removeSpy).toHaveBeenCalledWith("keydown", expect.any(Function));
+        removeSpy.mockRestore();
     });
 });
