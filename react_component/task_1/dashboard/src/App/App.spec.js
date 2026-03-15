@@ -4,7 +4,6 @@ import App from "./App";
 
 describe("App Component", () => {
     beforeEach(() => {
-        // Don't render here - each test should control its own render
         jest.clearAllMocks();
     });
 
