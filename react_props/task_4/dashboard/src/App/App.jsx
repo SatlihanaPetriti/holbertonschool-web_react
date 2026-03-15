@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 import { getLatestNotification } from '../utils/utils';
 import './App.css'
 
-function App() {
+function App({ isLoggedIn = false }) {
   const notificationsList = [
     {
       id: 1,
