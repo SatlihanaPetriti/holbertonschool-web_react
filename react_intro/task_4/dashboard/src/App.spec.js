@@ -1,44 +1,54 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("renders h1 with School Dashboard text", () => {
-    render(<App />);
-    expect(screen.getByRole('heading')).toHaveTextContent(/School dashboard/i);
-});
+describe("App Component", () => {
+    beforeEach(() => {
+        // Render app component
+        render(<App />);
+    });
 
-test("renders correct text in body and footer paragraphs", () => {
-    render(<App />);
-    expect(screen.getByText(/Login to access the full dashboard/i)).toBeInTheDocument();
-    expect(screen.getByText(/Copyright/i)).toBeInTheDocument();
-});
+    test("h1 element with the text School Dashboard is rendered", () => {
+        const heading = screen.getByRole("heading", { name: /School Dashboard/i });
+        expect(heading).toBeInTheDocument();
+    });
 
-test("renders an image", () => {
-    render(<App />);
-    const image = screen.getByAltText(/holberton logo/i);
-    expect(image).toBeInTheDocument();
-});
+    test("the text content within the 2 p elements in the app-body and app-footer divs matches", () => {
+        const divbody = screen.getByText(/Login to access the full dashboard/i);
+        const divfooter = screen.getByText(/Copyright 2025 - holberton School/i);
 
-test("renders 2 labels Email and Password", () => {
-    render(<App />);
-    const labelEmail = screen.getByText(/email/i);
-    const labelPassword = screen.getByText(/password/i);
+        expect(divbody).toBeInTheDocument();
+        expect(divfooter).toBeInTheDocument();
+    });
 
-    expect(labelEmail).toBeInTheDocument();
-    expect(labelPassword).toBeInTheDocument();
-});
+    test("an img element is rendered", () => {
+        const image = screen.getByAltText(/holberton logo/i);
+        expect(image).toBeInTheDocument();
+    });
 
-test("renders 2 input elements (email and password)", () => {
-    render(<App />);
-    const emailInput = screen.getByLabelText(/email/i);
-    const passwordInput = screen.getByLabelText(/password/i);
+    test("renders two input elements", () => {
+        //Get input elements
+        const inputElements = screen.getAllByRole("textbox");
+        const inputLength = inputElements.length;
 
-    expect(emailInput).toBeInTheDocument();
-    expect(passwordInput).toBeInTheDocument();
-});
+        // Assert element
+        expect(inputLength).toEqual(1);
+    });
 
-test("renders a button with OK text", () => {
-    render(<App />);
-    const button = screen.getByRole('button');
-    expect(button).toHaveTextContent(/OK/i);
-    expect(button).toBeInTheDocument();
+    test("renders two label elements with text 'email' & 'password'", () => {
+        // Get labels
+        const email = screen.getByLabelText(/Email/i);
+        const password = screen.getByLabelText(/Password/i);
+
+        // Assert elements and values
+        expect(email).toBeInTheDocument();
+        expect(password).toBeInTheDocument();
+    });
+
+    test("renders two button with text 'OK'", () => {
+        //Get button
+        const buttons = screen.getAllByRole("button");
+
+        // Assert text content of button
+        expect(buttons[1].textContent).toBe("OK");
+    });
 });
