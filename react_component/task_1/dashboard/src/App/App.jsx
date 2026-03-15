@@ -39,7 +39,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // Use document instead of window for better test compatibility
     document.addEventListener("keydown", this.handleKeyDown);
   }
 
@@ -55,7 +54,6 @@ class App extends Component {
         <div className="notifications-header">
           <Header />
           <div className="root-notifications">
-            {/* Add displayDrawer prop */}
             <Notifications
               notifications={this.notificationsList}
               displayDrawer={true}
@@ -67,7 +65,9 @@ class App extends Component {
             <CourseList courses={this.coursesList} />
           </div>
         ) : (
-          <Login />
+          <div className="App-body">
+            <Login />
+          </div>
         )}
         <Footer />
       </>

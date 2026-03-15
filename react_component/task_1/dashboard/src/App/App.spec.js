@@ -11,7 +11,6 @@ describe("App Component", () => {
         cleanup();
     });
 
-    // Remove .skip from all tests
     it("Renders Header component", () => {
         render(<App />);
         const heading = screen.getByRole("heading", {
@@ -50,7 +49,6 @@ describe("App Component", () => {
         cleanup();
 
         const logOut = jest.fn();
-        // Mock alert to prevent actual alert popup
         const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => { });
 
         render(<App logOut={logOut} />);
@@ -77,7 +75,6 @@ describe("App Component", () => {
         alertMock.mockRestore();
     });
 
-    // Add this test to verify event listener removal
     it("should remove event listener when component unmounts", () => {
         const removeEventListenerSpy = jest.spyOn(document, 'removeEventListener');
         const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => { });

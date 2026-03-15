@@ -13,6 +13,11 @@
     float: right;
 }
 
+.App-body {
+    padding: 2rem;
+    min-height: 400px;
+}
+
 .courses-body {
     padding: 2rem;
     min-height: 400px;
