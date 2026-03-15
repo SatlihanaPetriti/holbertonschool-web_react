@@ -27,14 +27,14 @@ function App() {
   ];
 
   return (
-    <Fragment>
+    <>
       <div className="root-notifications">
         <Notifications notifications={notificationsList} />
       </div>
       <Header />
       <Login />
       <Footer />
-    </Fragment>
+    </>
   );
 }
 

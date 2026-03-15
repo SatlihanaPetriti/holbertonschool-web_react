@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Fragment } from 'react';
+import CourseList from '../CourseList/CourseList'
+import '../CourseList/CourseList.css'
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
@@ -25,6 +26,11 @@ function App() {
       html: { __html: getLatestNotification() }
     }
   ];
+  const coursesList = [
+    { id: 1, name: "ES6", credit: "60" },
+    { id: 2, name: "Webpack", credit: "20" },
+    { id: 3, name: "React", credit: "40" },
+  ];
 
   return (
     <>
@@ -32,7 +38,7 @@ function App() {
         <Notifications notifications={notificationsList} />
       </div>
       <Header />
-      <Login />
+      {isLoggedIn ? (<div className='courses-body'><CourseList courses={coursesList} /></div>) : (<Login />)}
       <Footer />
     </>
   );

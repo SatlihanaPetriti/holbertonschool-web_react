@@ -8,14 +8,14 @@ import './App.css'
 
 function App() {
   return (
-    <Fragment>
+    <>
       <div className="root-notifications">
         <Notifications />
       </div>
       <Header />
       <Login />
       <Footer />
-    </Fragment>
+    </>
   );
 }
 
