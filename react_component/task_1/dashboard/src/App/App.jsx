@@ -73,6 +73,31 @@ class App extends Component {
       { id: 2, name: "Webpack", credit: "20" },
       { id: 3, name: "React", credit: "40" },
     ];
+
+    // Bind the handleKeyDown method to this instance
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
+
+  // Add event listener when component mounts
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  // Remove event listener when component unmounts
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  // Handle keyboard events
+  handleKeyDown(event) {
+    const { logOut = () => { } } = this.props;
+
+    // Check if control and h keys are pressed simultaneously
+    if (event.ctrlKey && event.key === 'h') {
+      event.preventDefault(); // Prevent default browser behavior
+      alert('Logging you out');
+      logOut();
+    }
   }
 
   render() {
@@ -96,5 +121,11 @@ class App extends Component {
     );
   }
 }
+
+// Set default props
+App.defaultProps = {
+  isLoggedIn: false,
+  logOut: () => { }
+};
 
 export default App;
