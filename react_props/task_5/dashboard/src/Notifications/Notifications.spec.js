@@ -1,5 +1,4 @@
 /* eslint-disable */
-/* eslint-disable */
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Notifications from "./Notifications";
@@ -9,10 +8,8 @@ describe("Notifications Component", () => {
         it("should display only the title, not the drawer content", () => {
             render(<Notifications displayDrawer={false} />);
 
-            // Title should always be displayed
             expect(screen.getByText("Your notifications")).toBeInTheDocument();
 
-            // Drawer content should not be displayed
             expect(screen.queryByText("Here is the list of notifications")).not.toBeInTheDocument();
             expect(screen.queryByText("No new notification for now")).not.toBeInTheDocument();
             expect(screen.queryByRole("button", { name: "Close" })).not.toBeInTheDocument();
@@ -29,15 +26,12 @@ describe("Notifications Component", () => {
 
             render(<Notifications notifications={notifications} displayDrawer={true} />);
 
-            // Title should always be displayed
             expect(screen.getByText("Your notifications")).toBeInTheDocument();
 
-            // Drawer content should be displayed
             expect(screen.getByText("Here is the list of notifications")).toBeInTheDocument();
             expect(screen.getByRole("button", { name: "Close" })).toBeInTheDocument();
             expect(screen.getByRole("list")).toBeInTheDocument();
 
-            // Check if notifications are rendered
             expect(screen.getByText("New course available")).toBeInTheDocument();
             expect(screen.getByText("New resume available")).toBeInTheDocument();
         });
@@ -45,17 +39,13 @@ describe("Notifications Component", () => {
         it("should display 'No new notification for now' when notifications array is empty", () => {
             render(<Notifications notifications={[]} displayDrawer={true} />);
 
-            // Title should always be displayed
             expect(screen.getByText("Your notifications")).toBeInTheDocument();
 
-            // Should show "No new notification for now"
             expect(screen.getByText("No new notification for now")).toBeInTheDocument();
 
-            // Should not show the notification list or the "Here is the list" text
             expect(screen.queryByText("Here is the list of notifications")).not.toBeInTheDocument();
             expect(screen.queryByRole("list")).not.toBeInTheDocument();
 
-            // Close button should still be visible
             expect(screen.getByRole("button", { name: "Close" })).toBeInTheDocument();
         });
     });
