@@ -3,46 +3,46 @@ import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 describe("App Component", () => {
-    afterEach(() => cleanup());
+  afterEach(() => cleanup());
 
-    it("renders Header component", () => {
-        render(<App />);
-        expect(screen.getByRole("heading", { level: 1, name: /school dashboard/i })).toBeInTheDocument();
-    });
+  it("renders Header component", () => {
+    render(<App />);
+    expect(screen.getByRole("heading", { level: 1, name: /school dashboard/i })).toBeInTheDocument();
+  });
 
-    it("renders Login component when not logged in", () => {
-        render(<App isLoggedIn={false} />);
-        expect(screen.getByText(/Login to access the full dashboard/i)).toBeInTheDocument();
-    });
+  it("renders Login component when not logged in", () => {
+    render(<App isLoggedIn={false} />);
+    expect(screen.getByText(/Login to access the full dashboard/i)).toBeInTheDocument();
+  });
 
-    it("renders CourseList when logged in", () => {
-        render(<App isLoggedIn={true} />);
-        expect(screen.getByText(/ES6/i)).toBeInTheDocument(); // first course name
-    });
+  it("renders CourseList when logged in", () => {
+    render(<App isLoggedIn={true} />);
+    expect(screen.getByText(/ES6/i)).toBeInTheDocument(); // first course name
+  });
 
-    it("renders Footer component", () => {
-        render(<App />);
-        expect(screen.getByText(/Copyright/i)).toBeInTheDocument();
-    });
+  it("renders Footer component", () => {
+    render(<App />);
+    expect(screen.getByText(/Copyright/i)).toBeInTheDocument();
+  });
 
-    it("calls logOut when Ctrl+H is pressed", async () => {
-        const logOut = jest.fn();
-        const alertMock = jest.spyOn(window, "alert").mockImplementation(() => { });
-        render(<App logOut={logOut} />);
+  it("calls logOut when Ctrl+H is pressed", async () => {
+    const logOut = jest.fn();
+    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
+    render(<App logOut={logOut} />);
 
-        await userEvent.keyboard("{Control>}h{/Control}");
+    await userEvent.keyboard("{Control>}h{/Control}");
 
-        expect(alertMock).toHaveBeenCalledWith("Logging you out");
-        expect(logOut).toHaveBeenCalledTimes(1);
+    expect(alertMock).toHaveBeenCalledWith("Logging you out");
+    expect(logOut).toHaveBeenCalledTimes(1);
 
-        alertMock.mockRestore();
-    });
+    alertMock.mockRestore();
+  });
 
-    it("removes keydown listener on unmount", () => {
-        const removeSpy = jest.spyOn(document, "removeEventListener");
-        const { unmount } = render(<App />);
-        unmount();
-        expect(removeSpy).toHaveBeenCalledWith("keydown", expect.any(Function));
-        removeSpy.mockRestore();
-    });
+  it("removes keydown listener on unmount", () => {
+    const removeSpy = jest.spyOn(document, "removeEventListener");
+    const { unmount } = render(<App />);
+    unmount();
+    expect(removeSpy).toHaveBeenCalledWith("keydown", expect.any(Function));
+    removeSpy.mockRestore();
+  });
 });
