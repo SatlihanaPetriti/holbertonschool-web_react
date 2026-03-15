@@ -1,5 +1,4 @@
 /* eslint-disable */
-/* eslint-disable */
 
 import closeIcon from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
