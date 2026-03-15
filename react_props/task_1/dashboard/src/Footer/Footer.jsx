@@ -1,15 +1,15 @@
-/* eslint-disable */
-import './Footer.css';
-import { getCurrentYear, getFooterCopy } from '../utils/utils';
+import React from 'react'
+import { getCurrentYear, getFooterCopy } from '../utils/utils'
+import './Footer.css'
 
-function Footer() {
+const Footer = () => {
     return (
         <div className="App-footer">
             <p>
-                Copyright {getCurrentYear()} - {getFooterCopy(false)}
+                Copyright {getCurrentYear()} - {getFooterCopy(true)}
             </p>
         </div>
-    );
+    )
 }
 
 export default Footer;
