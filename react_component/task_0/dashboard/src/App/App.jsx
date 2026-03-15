@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Component } from 'react';
 import CourseList from '../CourseList/CourseList'
 import '../CourseList/CourseList.css'
 import Notifications from '../Notifications/Notifications';
@@ -46,7 +47,6 @@ import './App.css'
 
 // export default App;
 
-/* eslint-disable */
 
 class App extends Component {
   constructor(props) {
