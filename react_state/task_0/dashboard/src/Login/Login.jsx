@@ -1,94 +1,81 @@
 /* eslint-disable */
-import React, { Component } from "react";
-import "./Login.css";
-import WithLogging from "../HOC/WithLogging";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import Login from "./Login";
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
+let container = null;
 
-        this.state = {
-            isLoggedIn: false,
-            email: "",
-            password: "",
-            enableSubmit: false,
-        };
+describe("Login Component", () => {
+    beforeEach(() => {
+        const rendered = render(<Login />);
+        container = rendered.container;
+    });
 
-        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
-        this.handleChangeEmail = this.handleChangeEmail.bind(this);
-        this.handleChangePassword = this.handleChangePassword.bind(this);
-    }
+    it("Login has correct text", () => {
+        const loginText = screen.getByText(/Login to access the full dashboard/i);
+        expect(loginText).toBeInTheDocument();
+    });
 
-    validateForm(email, password) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    it("renders two input elements, two labels and button", () => {
+        const inputElements = container.querySelectorAll("input");
+        const inputLength = inputElements.length;
 
-        return (
-            emailRegex.test(email) &&
-            password.length >= 8
-        );
-    }
+        const labelElements = container.querySelectorAll("label");
+        const labelsLength = labelElements.length;
 
-    handleChangeEmail(e) {
-        const email = e.target.value;
+        const button = screen.getByRole("button");
 
-        this.setState((prevState) => ({
-            email,
-            enableSubmit: this.validateForm(email, prevState.password),
-        }));
-    }
+        expect(inputLength).toEqual(3); // email, password, submit
+        expect(labelsLength).toEqual(2);
+        expect(button).toBeInTheDocument();
+    });
 
-    handleChangePassword(e) {
-        const password = e.target.value;
+    it("Labels have correct values", () => {
+        const email = screen.getByLabelText(/Email/i);
+        const password = screen.getByLabelText(/Password/i);
 
-        this.setState((prevState) => ({
-            password,
-            enableSubmit: this.validateForm(prevState.email, password),
-        }));
-    }
+        expect(email).toBeInTheDocument();
+        expect(password).toBeInTheDocument();
+    });
 
-    handleLoginSubmit(e) {
-        e.preventDefault(); // prevent page reload
+    it("Button has correct value", () => {
+        const button = screen.getByRole("button");
+        expect(button.textContent).toBe("OK");
+    });
 
-        this.setState({
-            isLoggedIn: true,
-        });
-    }
+    it("On label click triggers focus", async () => {
+        const emailLabel = screen.getByLabelText(/Email/i);
+        const inputField = screen.getByRole("textbox", { name: /email/i });
 
-    render() {
-        const { email, password, enableSubmit } = this.state;
+        await userEvent.click(emailLabel);
+        expect(inputField).toHaveFocus();
+    });
 
-        return (
-            <div className="App-body">
-                <p>Login to access the full dashboard</p>
+    // ✅ NEW TESTS
 
-                <form onSubmit={this.handleLoginSubmit}>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="text"
-                        id="email"
-                        name="email"
-                        value={email}
-                        onChange={this.handleChangeEmail}
-                    />
+    it("submit button is disabled by default", () => {
+        const button = screen.getByRole("button");
+        expect(button).toBeDisabled();
+    });
 
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={this.handleChangePassword}
-                    />
+    it("button becomes enabled with valid email and password", async () => {
+        const emailInput = screen.getByLabelText(/Email/i);
+        const passwordInput = screen.getByLabelText(/Password/i);
+        const button = screen.getByRole("button");
 
-                    <input
-                        type="submit"
-                        value="OK"
-                        disabled={!enableSubmit}
-                    />
-                </form>
-            </div>
-        );
-    }
-}
+        // Initially disabled
+        expect(button).toBeDisabled();
 
-export default WithLogging(Login);
+        // Type valid email
+        await userEvent.type(emailInput, "test@test.com");
+
+        // Still disabled (password not valid yet)
+        expect(button).toBeDisabled();
+
+        // Type valid password (>= 8 chars)
+        await userEvent.type(passwordInput, "password123");
+
+        // Now enabled
+        expect(button).toBeEnabled();
+    });
+});
