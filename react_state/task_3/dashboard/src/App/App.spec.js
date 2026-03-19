@@ -8,18 +8,15 @@ describe("App Component", () => {
     });
 
     it("Renders Header component", () => {
-        const heading = screen.getByRole("heading", {
-            level: 1,
-            name: /school dashboard/i,
-        });
-        expect(heading).toBeInTheDocument();
+        expect(
+            screen.getByRole("heading", { name: /school dashboard/i })
+        ).toBeInTheDocument();
     });
 
     it("Renders Login Component", () => {
-        const loginText = screen.getByText(
-            /Login to access the full dashboard/i
-        );
-        expect(loginText).toBeInTheDocument();
+        expect(
+            screen.getByText(/Login to access the full dashboard/i)
+        ).toBeInTheDocument();
     });
 
     it("Renders Footer Component", () => {
@@ -28,31 +25,46 @@ describe("App Component", () => {
 
     it("Login is rendered when user is not logged in", () => {
         cleanup();
-
         const { container } = render(<App />);
-        const loginComponent = container.querySelector(".App-body");
-
-        expect(loginComponent).toBeInTheDocument();
+        expect(container.querySelector(".App-body")).toBeInTheDocument();
     });
 
-  
     it("CourseList is rendered after successful login", async () => {
         cleanup();
-
         const { container } = render(<App />);
 
         const email = screen.getByLabelText(/Email/i);
         const password = screen.getByLabelText(/Password/i);
         const button = screen.getByRole("button");
 
-        // Fill valid inputs
         await userEvent.type(email, "test@test.com");
         await userEvent.type(password, "password123");
-
-        // Submit form
         await userEvent.click(button);
 
-        const courseList = container.querySelector("#CourseList");
-        expect(courseList).toBeInTheDocument();
+        expect(container.querySelector("#CourseList")).toBeInTheDocument();
+    });
+
+ 
+    it("returns to Login after logout", async () => {
+        cleanup();
+        render(<App />);
+
+        const email = screen.getByLabelText(/Email/i);
+        const password = screen.getByLabelText(/Password/i);
+        const button = screen.getByRole("button");
+
+        // login
+        await userEvent.type(email, "test@test.com");
+        await userEvent.type(password, "password123");
+        await userEvent.click(button);
+
+        // logout
+        const logoutLink = screen.getByText(/logout/i);
+        await userEvent.click(logoutLink);
+
+        // back to login screen
+        expect(
+            screen.getByText(/Login to access the full dashboard/i)
+        ).toBeInTheDocument();
     });
 });
