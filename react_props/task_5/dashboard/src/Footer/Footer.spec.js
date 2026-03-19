@@ -7,7 +7,6 @@ describe('Footer Component', () => {
         const year = getCurrentYear();
         render(<Footer />);
 
-        // The correct text should be "Holberton School", not "Holberton School main dashboard"
         const paragraph = screen.getByText(
             `Copyright ${year} - Holberton School`,
             { exact: false }

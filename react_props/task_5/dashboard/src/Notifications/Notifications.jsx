@@ -7,10 +7,8 @@ import "./Notifications.css";
 const Notifications = ({ notifications = [], displayDrawer = false }) => {
     return (
         <div className="notifications-container">
-            {/* Always visible title */}
             <div className="notification-title">Your notifications</div>
 
-            {/* Only render drawer if displayDrawer is true */}
             {displayDrawer && (
                 <div className="notification-items">
                     {notifications.length > 0 ? (
@@ -31,7 +29,6 @@ const Notifications = ({ notifications = [], displayDrawer = false }) => {
                         <p>No new notification for now</p>
                     )}
 
-                    {/* Close button always visible when displayDrawer is true */}
                     <button
                         aria-label="Close"
                         onClick={() => console.log("Close button has been clicked")}

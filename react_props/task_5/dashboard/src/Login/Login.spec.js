@@ -58,8 +58,6 @@ describe("Login Component", () => {
         // Assert if button has correct value
         expect(button.textContent).toBe("OK");
     });
-
-    // Test if click on label triggeres focus on input element
     it("On label click triggers focus", async () => {
         // Get email related elements
         const emailLabel = screen.getByLabelText(/Email/i);
