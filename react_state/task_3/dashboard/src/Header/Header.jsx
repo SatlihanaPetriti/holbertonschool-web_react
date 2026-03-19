@@ -11,7 +11,7 @@ class Header extends Component {
         const { user, logOut } = this.context;
 
         return (
-            <div>
+            <>
                 <div className="App-header">
                     <img src={logo} alt="holberton logo" />
                     <h1 style={{ color: "#e1003c" }}>School dashboard</h1>
@@ -20,18 +20,13 @@ class Header extends Component {
                 {user.isLoggedIn && (
                     <div id="logoutSection">
                         Welcome {user.email} (
-                        <a
-                            href="#logout"
-                            onClick={(e) => {
-                                e.preventDefault(); 
-                            }}
-                        >
+                        <a href="#logout" onClick={logOut}>
                             logout
                         </a>
                         )
                     </div>
                 )}
-            </div>
+            </>
         );
     }
 }
