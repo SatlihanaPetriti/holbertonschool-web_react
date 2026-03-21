@@ -68,7 +68,9 @@ describe("App Component", () => {
         await userEvent.click(notification);
 
         expect(screen.queryByText("New course available")).not.toBeInTheDocument();
-        expect(consoleSpy).toHaveBeenCalledWith("Notification 1 has been marked as read");
+        expect(consoleSpy).toHaveBeenCalledWith(
+            "Notification 1 has been marked as read"
+        );
 
         consoleSpy.mockRestore();
     });

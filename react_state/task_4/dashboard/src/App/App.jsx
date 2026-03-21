@@ -10,6 +10,24 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import AppContext from "../Context/context";
 import "./App.css";
 
+const notificationsList = [
+  { id: 1, type: "default", value: "New course available" },
+  { id: 2, type: "urgent", value: "New resume available" },
+  {
+    id: 3,
+    type: "urgent",
+    html: {
+      __html: "<strong>Urgent requirement</strong> - complete by EOD",
+    },
+  },
+];
+
+const coursesList = [
+  { id: 1, name: "ES6", credit: "60" },
+  { id: 2, name: "Webpack", credit: "20" },
+  { id: 3, name: "React", credit: "40" },
+];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,27 +35,16 @@ class App extends Component {
     this.state = {
       displayDrawer: false,
       user: { email: "", password: "", isLoggedIn: false },
-      notifications: [
-        { id: 1, type: "default", value: "New course available" },
-        { id: 2, type: "urgent", value: "New resume available" },
-        {
-          id: 3,
-          type: "urgent",
-          html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" },
-        },
-      ],
-      courses: [
-        { id: 1, name: "ES6", credit: "60" },
-        { id: 2, name: "Webpack", credit: "20" },
-        { id: 3, name: "React", credit: "40" },
-      ],
+      notifications: notificationsList,
+      courses: coursesList,
     };
 
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
-    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
+    this.markNotificationAsRead =
+      this.markNotificationAsRead.bind(this);
   }
 
   handleDisplayDrawer() {
@@ -55,25 +62,34 @@ class App extends Component {
   }
 
   logOut() {
-    this.setState({ user: { email: "", password: "", isLoggedIn: false } });
+    this.setState({
+      user: { email: "", password: "", isLoggedIn: false },
+    });
   }
 
   markNotificationAsRead(id) {
     console.log(`Notification ${id} has been marked as read`);
-    this.setState({
-      notifications: this.state.notifications.filter(n => n.id !== id),
-    });
+
+    this.setState((prevState) => ({
+      notifications: prevState.notifications.filter(
+        (notif) => notif.id !== id
+      ),
+    }));
   }
 
   render() {
     const { user, displayDrawer, notifications, courses } = this.state;
 
-    const contextValue = { user, logOut: this.logOut };
+    const contextValue = {
+      user,
+      logOut: this.logOut,
+    };
 
     return (
       <AppContext.Provider value={contextValue}>
         <div className="notifications-header">
           <Header />
+
           <div className="root-notifications">
             <Notifications
               notifications={notifications}
