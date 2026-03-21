@@ -33,7 +33,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      displayDrawer: false,
+      displayDrawer: true,
       user: { email: "", password: "", isLoggedIn: false },
       notifications: notificationsList,
       courses: coursesList,
