@@ -1,50 +1,30 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Notifications from "./Notifications";
 
-describe("Notifications Component - render optimization", () => {
-    it("does not re-render if notifications length stays the same", () => {
+describe("Notifications Component", () => {
+
+    it("logs message when notification is clicked", () => {
+
         const notifications = [
             { id: 1, type: "default", value: "New course available" },
         ];
 
-        const { rerender } = render(
+        const consoleSpy = jest.spyOn(console, "log").mockImplementation(() => { });
+
+        render(
             <Notifications notifications={notifications} displayDrawer={true} />
         );
 
-        // Spy on render
-        const renderSpy = jest.spyOn(Notifications.prototype, "render");
+        const listItem = screen.getByText("New course available");
 
-        // Re-render with the same length
-        rerender(<Notifications notifications={[{ id: 1, type: "default", value: "Updated text" }]} displayDrawer={true} />);
+        fireEvent.click(listItem);
 
-        expect(renderSpy).not.toHaveBeenCalled();
-
-        renderSpy.mockRestore();
-    });
-
-    it("re-renders if notifications length changes", () => {
-        const notifications = [
-            { id: 1, type: "default", value: "New course available" },
-        ];
-
-        const { rerender } = render(
-            <Notifications notifications={notifications} displayDrawer={true} />
+        expect(consoleSpy).toHaveBeenCalledWith(
+            "Notification 1 has been marked as read"
         );
 
-        const renderSpy = jest.spyOn(Notifications.prototype, "render");
-
-        // Re-render with increased length
-        const newNotifications = [
-            { id: 1, type: "default", value: "New course available" },
-            { id: 2, type: "urgent", value: "New resume available" },
-        ];
-
-        rerender(<Notifications notifications={newNotifications} displayDrawer={true} />);
-
-        expect(renderSpy).toHaveBeenCalled();
-
-        renderSpy.mockRestore();
+        consoleSpy.mockRestore();
     });
+
 });
