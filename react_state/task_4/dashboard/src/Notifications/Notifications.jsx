@@ -28,11 +28,10 @@ class Notifications extends React.PureComponent {
                                 <ul>
                                     {notifications.map(notification => (
                                         <NotificationItem
-                                            key={notification.id}
                                             id={notification.id}
                                             type={notification.type}
-                                            html={notification.html}
                                             value={notification.value}
+                                            html={notification.html}
                                             markAsRead={markNotificationAsRead}
                                         />
                                     ))}

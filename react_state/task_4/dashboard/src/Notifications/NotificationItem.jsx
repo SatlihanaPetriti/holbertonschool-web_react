@@ -9,7 +9,7 @@ const NotificationItem = ({ id, type = "default", value, html, markAsRead }) => 
         <li
             data-notification-type={type}
             style={style}
-            onClick={() => markAsRead && markAsRead(id)}  // 🔥 FIX KRITIK
+            onClick={() => markAsRead && markAsRead(id)} 
         >
             {html ? (
                 <span dangerouslySetInnerHTML={html} />

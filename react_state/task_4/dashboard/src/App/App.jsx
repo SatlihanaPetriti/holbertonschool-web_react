@@ -71,9 +71,7 @@ class App extends Component {
     console.log(`Notification ${id} has been marked as read`);
 
     this.setState((prevState) => ({
-      notifications: prevState.notifications.filter(
-        (n) => n.id !== id
-      ),
+      notifications: prevState.notifications.filter((n) => n.id !== id),
     }));
   }
 
