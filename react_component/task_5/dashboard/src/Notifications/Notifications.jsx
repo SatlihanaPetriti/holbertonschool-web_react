@@ -1,10 +1,12 @@
-/* eslint-disable */
 import React from "react";
 import closeIcon from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
 import "./Notifications.css";
 
 class Notifications extends React.Component {
+    shouldComponentUpdate(nextProps) {
+        return nextProps.notifications.length !== this.props.notifications.length;
+    }
 
     markAsRead = (id) => {
         console.log(`Notification ${id} has been marked as read`);
@@ -41,9 +43,7 @@ class Notifications extends React.Component {
 
                         <button
                             aria-label="Close"
-                            onClick={() =>
-                                console.log("Close button has been clicked")
-                            }
+                            onClick={() => console.log("Close button has been clicked")}
                             className="close-button"
                         >
                             <img alt="Close Button" src={closeIcon} />
