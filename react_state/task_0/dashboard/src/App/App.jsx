@@ -3,7 +3,7 @@ import CourseList from "../CourseList/CourseList";
 import "../CourseList/CourseList.css";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import Login from "../Login/Login";
+import { Login } from "../Login/Login";
 import Notifications from "../Notifications/Notifications";
 import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
@@ -15,6 +15,7 @@ class App extends Component {
 
     this.state = {
       displayDrawer: false,
+      isLoggedIn: false,
     };
 
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
@@ -61,8 +62,12 @@ class App extends Component {
     this.setState({ displayDrawer: false });
   }
 
+  handleLogin = () => {
+    this.setState({ isLoggedIn: true });
+  };
+
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn } = this.state;
 
     return (
       <>
@@ -84,7 +89,7 @@ class App extends Component {
           </BodySectionWithMarginBottom>
         ) : (
           <BodySectionWithMarginBottom title="Log in to continue">
-            <Login />
+            <Login onLogin={this.handleLogin} />
           </BodySectionWithMarginBottom>
         )}
 
