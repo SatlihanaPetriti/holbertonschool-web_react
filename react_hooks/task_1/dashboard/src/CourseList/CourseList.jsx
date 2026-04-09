@@ -10,7 +10,7 @@ const CourseList = ({ courses = [] }) => {
             {courses.length > 0 ? (
                 <>
                     <thead>
-                        <CourseListRow isHeader={true} textFirstCell={"Available courses"} />
+                        <CourseListRow isHeader={true} textnpmFirstCell={"Available courses"} />
                         <CourseListRow
                             isHeader={true}
                             textFirstCell={"Course Name"}

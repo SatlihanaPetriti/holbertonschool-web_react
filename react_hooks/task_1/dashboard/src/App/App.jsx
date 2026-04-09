@@ -65,6 +65,9 @@ class App extends Component {
   handleLogin = () => {
     this.setState({ isLoggedIn: true });
   };
+  handleLogout = () => {
+    this.setState({ isLoggedIn: false });
+  };
 
   render() {
     const { isLoggedIn } = this.state;
