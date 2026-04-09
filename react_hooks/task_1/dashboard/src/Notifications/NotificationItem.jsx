@@ -1,4 +1,3 @@
-import React from "react";
 
 const NotificationItem = ({ id, type = "default", value, html, markAsRead }) => {
     const style = {
