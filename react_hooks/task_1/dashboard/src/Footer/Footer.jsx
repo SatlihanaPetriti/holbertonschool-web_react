@@ -1,4 +1,5 @@
-import { useContext } from "react";
+/* eslint-disable */
+import React, { useContext } from "react";
 import { getCurrentYear, getFooterCopy } from "../utils/utils";
 import AppContext from "../Context/context";
 import "./Footer.css";
@@ -11,8 +12,7 @@ const Footer = () => {
             <p>
                 Copyright {getCurrentYear()} - {getFooterCopy(true)}
             </p>
-
-            {user && user.isLoggedIn && (
+            {user.isLoggedIn && (
                 <p>
                     <a href="#contact">Contact us</a>
                 </p>
