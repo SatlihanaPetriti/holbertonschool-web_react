@@ -1,3 +1,4 @@
+
 import closeIcon from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
 import "./Notifications.css";
@@ -7,11 +8,17 @@ function Notifications({
     displayDrawer = false,
     handleDisplayDrawer,
     handleHideDrawer,
-    markNotificationAsRead,
 }) {
+    const markAsRead = (id) => {
+        console.log(`Notification ${id} has been marked as read`);
+    };
+
     return (
         <div className="notifications-container">
-            <div className="notification-title" onClick={handleDisplayDrawer}>
+            <div
+                className="notification-title"
+                onClick={handleDisplayDrawer}
+            >
                 Your notifications
             </div>
 
@@ -26,9 +33,9 @@ function Notifications({
                                         key={notification.id}
                                         id={notification.id}
                                         type={notification.type}
-                                        value={notification.value}
                                         html={notification.html}
-                                        markAsRead={markNotificationAsRead}
+                                        value={notification.value}
+                                        markAsRead={markAsRead}
                                     />
                                 ))}
                             </ul>
@@ -55,20 +62,6 @@ function areEqual(prevProps, nextProps) {
 
     if (prevProps.notifications.length !== nextProps.notifications.length)
         return false;
-
-    for (let i = 0; i < prevProps.notifications.length; i++) {
-        const prev = prevProps.notifications[i];
-        const next = nextProps.notifications[i];
-
-        if (
-            prev.id !== next.id ||
-            prev.type !== next.type ||
-            prev.value !== next.value ||
-            prev.html !== next.html
-        ) {
-            return false;
-        }
-    }
 
     return true;
 }
