@@ -160,6 +160,6 @@ function App() {
       <Footer />
     </AppContext.Provider>
   );
-};
+}
 
 export default App;
