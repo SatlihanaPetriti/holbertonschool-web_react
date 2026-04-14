@@ -1,10 +1,10 @@
 /* eslint-disable */
 import closeIcon from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
+import { memo } from "react";
 import "./Notifications.css";
-import React from "react";
 
-const Notifications = ({ notifications, displayDrawer }) => {
+const Notifications = memo(({ notifications, displayDrawer }) => {
 
     const markAsRead = (id) => {
         console.log(`Notification ${id} has been marked as read`);
@@ -49,6 +49,6 @@ const Notifications = ({ notifications, displayDrawer }) => {
             )}
         </div>
     );
-}
+})
 
 export default Notifications;

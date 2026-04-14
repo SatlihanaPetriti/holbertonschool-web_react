@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import "./Login.css";
-import React from "react";
 
 export function Login({ onLogin }) {
 
@@ -34,8 +33,6 @@ export function Login({ onLogin }) {
             setEnableSubmit(true);
             onLogin();
         }
-
-
     }
 
     return (

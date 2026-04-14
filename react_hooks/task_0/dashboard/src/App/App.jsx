@@ -66,6 +66,10 @@ class App extends Component {
     this.setState({ isLoggedIn: true });
   };
 
+  handleLogout = () => {
+    this.setState({ isLoggedIn: false });
+  }
+
   render() {
     const { isLoggedIn } = this.state;
 
@@ -85,7 +89,7 @@ class App extends Component {
 
         {isLoggedIn ? (
           <BodySectionWithMarginBottom title="Course list">
-            <CourseList courses={this.coursesList} />
+            <CourseList courses={this.coursesList} onLogout={this.handleLogout} />
           </BodySectionWithMarginBottom>
         ) : (
           <BodySectionWithMarginBottom title="Log in to continue">

@@ -1,3 +1,4 @@
+import React from 'react'
 import "./CourseList.css"
 
 const CourseListRow = ({ isHeader = false, textFirstCell = '', textSecondCell = null }) => {
