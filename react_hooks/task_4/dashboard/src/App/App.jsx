@@ -43,7 +43,7 @@ function logDevelopmentError(error) {
   }
 }
 
-const App = () => {
+function App() {
   const { user: contextUser } = useContext(AppContext);
   const removedNotificationIdsRef = useRef(new Set());
   const [displayDrawer, setDisplayDrawer] = useState(true);
