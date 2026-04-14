@@ -19,7 +19,7 @@ export const initialState = {
 };
 
 export function appReducer(state = initialState, action) {
-    switch (action.type) {
+    switch (action?.type) {
         case APP_ACTIONS.LOGIN:
             return {
                 ...state,
@@ -33,7 +33,11 @@ export function appReducer(state = initialState, action) {
         case APP_ACTIONS.LOGOUT:
             return {
                 ...state,
-                user: initialState.user,
+                user: {
+                    email: "",
+                    password: "",
+                    isLoggedIn: false,
+                },
             };
 
         case APP_ACTIONS.TOGGLE_DRAWER:
@@ -46,7 +50,7 @@ export function appReducer(state = initialState, action) {
             return {
                 ...state,
                 notifications: state.notifications.filter(
-                    (item) => item.id !== action.payload
+                    (n) => n.id !== action.payload
                 ),
             };
 
