@@ -1,4 +1,4 @@
-
+import { memo } from "react";
 import closeIcon from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
 import "./Notifications.css";
@@ -59,11 +59,9 @@ function Notifications({
 
 function areEqual(prevProps, nextProps) {
     if (prevProps.displayDrawer !== nextProps.displayDrawer) return false;
-
     if (prevProps.notifications.length !== nextProps.notifications.length)
         return false;
-
     return true;
 }
 
-export default React.memo(Notifications, areEqual);
+export default memo(Notifications, areEqual);
