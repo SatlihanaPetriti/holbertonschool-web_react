@@ -22,9 +22,9 @@ function normalizeNotifications(data) {
   return nextNotifications.map((notification) =>
     notification.html
       ? {
-          ...notification,
-          html: { __html: getLatestNotification() },
-        }
+        ...notification,
+        html: { __html: getLatestNotification() },
+      }
       : notification
   );
 }
@@ -43,7 +43,7 @@ function logDevelopmentError(error) {
   }
 }
 
-const App = () => {
+function App() {
   const { user: contextUser } = useContext(AppContext);
   const removedNotificationIdsRef = useRef(new Set());
   const [displayDrawer, setDisplayDrawer] = useState(true);
