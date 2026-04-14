@@ -1,42 +1,56 @@
-import { useState } from "react";
-import React from "react";
-const useLogin = (onLogin) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+import { useState } from "react"
+const onLogin = () => {
     const [enableSubmit, setEnableSubmit] = useState(false);
+    const [formData, setFormData] = useState({ email: "", password: "" });
 
-    const validateForm = (currentEmail, currentPassword) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
-        return emailRegex.test(currentEmail) && currentPassword.length >= 8;
+    const validateForm = (email, password) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        return emailRegex.test(email) && password.length >= 8;
     };
 
     const handleChangeEmail = (e) => {
-        const newEmail = e.target.value;
-        setEmail(newEmail);
-        setEnableSubmit(validateForm(newEmail, password));
+        const { value: email } = e.target;
+        const { password } = formData;
+
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            email,
+        }));
+        setEnableSubmit(validateForm(email, password));
     };
 
     const handleChangePassword = (e) => {
-        const newPassword = e.target.value;
-        setPassword(newPassword);
-        setEnableSubmit(validateForm(email, newPassword));
+        const { value: password } = e.target;
+        const { email } = formData;
+        if (value.length >= 8) {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                password,
+            }));
+            setEnableSubmit(validateForm(email, password));
+        }
     };
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-        if (enableSubmit && onLogin) {
-            onLogin(email, password);
+
+        const { email, password } = formData;
+
+        if (props.logIn) {
+            props.logIn(email, password);
         }
     };
 
+    const { email, password } = formData
+
     return {
-        email,
-        password,
+        formData,
         enableSubmit,
         handleChangeEmail,
         handleChangePassword,
-        handleLoginSubmit,
-    };
-};
+        handleLoginSubmit
+    }
+}
 
-export default useLogin;
+export default onLogin

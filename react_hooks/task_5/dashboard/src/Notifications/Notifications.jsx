@@ -2,7 +2,7 @@ import { memo } from "react";
 import closeIcon from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
 import "./Notifications.css";
-import React from 'react';
+
 function Notifications({
     notifications = [],
     displayDrawer = false,

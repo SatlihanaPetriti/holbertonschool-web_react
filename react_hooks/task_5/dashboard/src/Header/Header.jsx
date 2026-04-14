@@ -2,7 +2,7 @@ import { useContext } from "react";
 import logo from "../assets/holberton-logo.jpg";
 import AppContext from "../Context/context";
 import "./Header.css";
-import React from 'react';
+
 function Header() {
     const { user = {}, logOut = () => {} } = useContext(AppContext);
 
