@@ -277,7 +277,7 @@ describe("App Component", () => {
         expect(screen.getByTestId("header-logged-in")).toHaveTextContent("false");
     });
 
-    it("notification drawer toggles correctly", async () => {
+    it("handles display drawer show and hide actions", async () => {
         const user = userEvent.setup();
         await renderApp();
 
