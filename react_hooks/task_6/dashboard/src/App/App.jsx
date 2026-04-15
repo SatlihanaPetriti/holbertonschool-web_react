@@ -70,6 +70,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (!state.user.isLoggedIn) return;
     let isMounted = true;
 
     const fetchCourses = async () => {

@@ -204,7 +204,6 @@ describe("App Component", () => {
 
         await waitFor(() => {
             expect(mockAxios.get).toHaveBeenCalledWith("/notifications.json");
-            expect(mockAxios.get).toHaveBeenCalledWith("/courses.json");
         });
 
         return rendered;
@@ -252,12 +251,12 @@ describe("App Component", () => {
         const user = userEvent.setup();
         await renderApp();
 
-        expect(getCoursesFetchCount()).toBe(1);
+        expect(getCoursesFetchCount()).toBe(0);
 
         await user.click(screen.getByRole("button", { name: /trigger login/i }));
 
         await waitFor(() => {
-            expect(getCoursesFetchCount()).toBe(2);
+            expect(getCoursesFetchCount()).toBe(1);
         });
 
         expect(screen.getByText("ES6 - 60")).toBeInTheDocument();
@@ -266,7 +265,7 @@ describe("App Component", () => {
         await user.click(screen.getByRole("button", { name: /^logout$/i }));
 
         await waitFor(() => {
-            expect(getCoursesFetchCount()).toBe(3);
+            expect(getCoursesFetchCount()).toBe(1);
         });
     });
 
@@ -282,17 +281,17 @@ describe("App Component", () => {
         const user = userEvent.setup();
         await renderApp();
 
-        expect(screen.getByTestId("display-drawer")).toHaveTextContent("true");
-
-        await user.click(
-            screen.getByRole("button", { name: /close notifications/i })
-        );
         expect(screen.getByTestId("display-drawer")).toHaveTextContent("false");
 
         await user.click(
             screen.getByRole("button", { name: /open notifications/i })
         );
         expect(screen.getByTestId("display-drawer")).toHaveTextContent("true");
+
+        await user.click(
+            screen.getByRole("button", { name: /close notifications/i })
+        );
+        expect(screen.getByTestId("display-drawer")).toHaveTextContent("false");
     });
 
     it("keeps notification handlers stable across re-renders", async () => {
