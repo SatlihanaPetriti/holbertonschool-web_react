@@ -277,7 +277,7 @@ describe("App Component with Reducer Integration", () => {
         expect(screen.getByTestId("header-logged-in")).toHaveTextContent("false");
     });
 
-    it("handles display drawer show and hide actions", async () => {
+    it("notification drawer toggles correctly", async () => {
         const user = userEvent.setup();
         await renderApp();
 
