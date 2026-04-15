@@ -178,7 +178,7 @@ jest.mock("../BodySection/BodySectionWithMarginBottom", () => {
 
 import App from "./App";
 
-describe("App Component", () => {
+describe("App Component with Reducer Integration", () => {
     const notificationsData = [
         { id: 1, type: "default", value: "New course available" },
         { id: 2, type: "urgent", value: "New resume available" },
