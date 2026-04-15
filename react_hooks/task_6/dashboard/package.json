@@ -36,8 +36,8 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "automock": false,
     "moduleNameMapper": {
+      "^axios$": "jest-mock-axios",
       "\\.(css|less)$": "identity-obj-proxy",
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/fileTransformer.js"
     },
