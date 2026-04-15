@@ -1,5 +1,5 @@
+/*eslint-disable*/
 import { Map } from 'immutable';
-
 const map = Map({
     1: 'Liam',
     2: 'Noah',
@@ -9,9 +9,7 @@ const map = Map({
     6: 'Lucas',
 });
 
-const map2 = map.withMutations((mutableMap) => {
+export const map2 = map.withMutations((mutableMap) => {
     mutableMap.set(2, 'Benjamin');
     mutableMap.set(4, 'Oliver');
 });
-
-export { map, map2 };
