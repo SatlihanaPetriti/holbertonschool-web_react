@@ -37,7 +37,7 @@
   "jest": {
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
-      "^axios$": "j<rootDir>/src/__mocks__/axios.js",
+      "^axios$": "jest-mock-axios",
       "\\.(css|less)$": "identity-obj-proxy",
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/fileTransformer.js"
     },
