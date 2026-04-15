@@ -38,6 +38,7 @@ export function appReducer(state = initialState, action) {
                     password: "",
                     isLoggedIn: false,
                 },
+                courses: [],
             };
 
         case APP_ACTIONS.TOGGLE_DRAWER:
