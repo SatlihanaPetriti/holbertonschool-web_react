@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import { List, Map } from './node_modules/immutable/dist/immutable';
+import { List, Map } from 'immutable';
 export function concatElements(page1, page2) {
     const list1 = List(page1);
     const list2 = List(page2);
