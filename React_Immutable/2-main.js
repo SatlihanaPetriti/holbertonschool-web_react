@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import accessImmutableObject from './2-nested.js';
+const accessImmutableObject = require('./2-nested');
 
 const obj = {
     name: {
